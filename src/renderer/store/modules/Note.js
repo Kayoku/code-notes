@@ -12,6 +12,7 @@ const state = {
   notes: [],
   languageSelected: 'all',
   gistsSelected: false,
+  isLoading: false,
 };
 
 const mutations = {
@@ -34,10 +35,14 @@ const mutations = {
   SELECT_GISTS(state, gistsSelected) {
     state.gistsSelected = gistsSelected;
   },
+  SELECT_LOADING(state, loading) {
+    state.isLoading = loading;
+  },
 };
 
 const actions = {
   loadNotes(store) {
+    store.commit('SELECT_LOADING', true);
     if (store.state.gistsSelected) {
       store.commit('LOAD_NOTES', []);
 
@@ -61,12 +66,14 @@ const actions = {
           });
 
           store.commit('LOAD_NOTES', notes);
+          store.commit('SELECT_LOADING', false);
         });
       });
     } else {
       db.find({}, (err, notes) => {
         if (!err) {
           store.commit('LOAD_NOTES', notes);
+          store.commit('SELECT_LOADING', false);
         }
       });
     }
@@ -134,6 +141,7 @@ const getters = {
   },
   languageSelected: state => state.languageSelected,
   gistsSelected: state => state.gistsSelected,
+  isLoading: state => state.isLoading,
 };
 
 export default {

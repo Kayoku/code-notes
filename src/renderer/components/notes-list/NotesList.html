@@ -19,12 +19,19 @@
     </div>
   </div>
 
-  <div v-if="notesFiltered.length > 0" class="columns notes" v-for="note in notesFiltered">
+  <div class="loading-bro" v-if="isLoading">
+    <h1>Loading...</h1>
+    <svg id="load" x="0px" y="0px" viewBox="0 0 150 150">
+      <circle id="loading-inner" cx="75" cy="75" r="60"/>
+    </svg>
+  </div>
+
+  <div v-if="notesFiltered.length > 0 && !isLoading" class="columns notes" v-for="note in notesFiltered">
     <div class="column is-12 note-card">
       <cn-note-card :note="note"></cn-note-card>
     </div>
   </div>
-  <div v-if="notesFiltered.length === 0 && searchField === ''" class="columns notes">
+  <div v-if="notesFiltered.length === 0 && searchField === '' && !isLoading" class="columns notes">
     <div class="column is-12 no-note">
       <h1>Hey !</h1>
       <h2>You don't have any {{gistsSelected ? 'gist' : 'note'}}...</h2>
@@ -33,7 +40,7 @@
       </button>
     </div>
   </div>
-  <div v-if="notesFiltered.length === 0 && searchField !== ''" class="columns notes">
+  <div v-if="notesFiltered.length === 0 && searchField !== '' && !isLoading" class="columns notes">
     <div class="column is-12 no-note">
       <h1>Oh :(</h1>
       <h2>Sorry, no {{gistsSelected ? 'gist' : 'note'}} found for your search</h2>

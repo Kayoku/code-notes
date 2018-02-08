@@ -29,6 +29,7 @@ export default {
       'noteById',
       'languageSelected',
       'gistsSelected',
+      'isLoading',
     ]),
     notesFiltered() {
       const notesFiltered = this.notes.filter(item =>
