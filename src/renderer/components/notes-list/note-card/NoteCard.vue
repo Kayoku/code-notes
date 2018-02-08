@@ -17,18 +17,17 @@ export default {
   props: {
     note: Object,
   },
-  mounted() {
-  },
+  mounted() {},
   data() {
     return {
-      updateNoteModalActive: false
+      updateNoteModalActive: false,
     };
   },
   computed: {
     ...Vuex.mapGetters(['notes']),
     displayNoteName() {
       return this.note.name.split('-')[0];
-    }
+    },
   },
   methods: {
     updateNote() {
@@ -49,7 +48,7 @@ export default {
     onCopyClipboardSuccess() {
       this.$toast.open({
         message: 'Copied',
-        position: 'is-bottom'
+        position: 'is-bottom',
       });
     },
   },
@@ -57,4 +56,5 @@ export default {
 </script>
 
 <style src="./NoteCard.scss" lang="scss" scoped>
+
 </style>

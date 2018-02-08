@@ -12,8 +12,9 @@
 
   #search-buttons {
     position: fixed;
-    top: 72px;
-    width: 73.5%;
+    top: 82px;
+    left: 27.5%;
+    width: 71.5%;
     z-index: 800;
     background-color: white;
   }
@@ -34,4 +35,14 @@
     font-size: 20px;
     margin-bottom: 20px;
   }
+}
+
+#search {
+  width: 87%;
+}
+
+#buttons {
+  position: fixed;
+  top: 72px;
+  right: 2.3%;
 }

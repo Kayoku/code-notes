@@ -24,8 +24,6 @@
             <p>A simple code snippet manager for developers built with Electron & Vue.js 🚀</p>
 
             <p>Feel free to contribute on <a @click="open('https://github.com/lauthieb/code-notes')">Github</a> 🍻</p>
-
-            <img class="badge" src="http://forthebadge.com/images/badges/built-with-love.svg" alt="Built with love">
           </div>
         </div>
       </div>
@@ -34,62 +32,62 @@
 </template>
 
 <script>
-// eslint-disable-next-line
-import { remote } from 'electron';
+  // eslint-disable-next-line
+  import {remote} from 'electron';
 
-export default {
-  name: 'cn-navbar',
-  data() {
-    return {
-      appVersion: remote.app.getVersion(),
-      aboutBlocCodesModal: false,
-    };
-  },
-  methods: {
-    open(link) {
-      this.$electron.shell.openExternal(link);
+  export default {
+    name: 'cn-navbar',
+    data() {
+      return {
+        appVersion: remote.app.getVersion(),
+        aboutBlocCodesModal: false,
+      };
     },
-  },
-};
+    methods: {
+      open(link) {
+        this.$electron.shell.openExternal(link);
+      },
+    },
+  };
 </script>
 
 <style lang="scss" scoped>
-nav {
-  -webkit-app-region: drag;
-  background-color: $primary;
-  text-align: center;
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 1000;
+  nav {
+    -webkit-app-region: drag;
+    background-color: $primary;
+    text-align: center;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
 
-  .logo {
-    padding: 10px 10px 4px 10px;
-    width: 110px;
-    position: relative;
-    left: 4%;
-  }
-
-  #about-code-notes,
-  #github {
-    color: $light;
-    position: relative;
-    top: 20px;
-    right: 20px;
-  }
-
-  .modal {
-    .media-content {
-      text-align: center;
+    .logo {
+      padding: 10px 10px 4px 10px;
+      width: 110px;
+      position: relative;
+      left: 4%;
     }
 
-    img {
-      width: 250px;
+    #about-code-notes,
+    #github {
+      color: $light;
+      position: relative;
+      top: 20px;
+      right: 20px;
     }
 
-    .badge {
-      width: 160px;
+    .modal {
+      .media-content {
+        text-align: center;
+      }
+
+      img {
+        width: 250px;
+      }
+
+      .badge {
+        width: 160px;
+      }
     }
   }
-}
 </style>

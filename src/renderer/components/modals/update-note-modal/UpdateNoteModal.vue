@@ -3,6 +3,7 @@
 </template>
 
 <script>
+import Vuex from 'vuex';
 import editor from '../../editor/Editor';
 import languages from '../../../assets/data/languages.json';
 import converter from '../../../converter';
@@ -22,11 +23,11 @@ export default {
         description: '',
         files: {},
         updatedAt: null,
-        createdAt: null
+        createdAt: null,
       },
       files: [],
       languages,
-      displayDupError: false
+      displayDupError: false,
     };
   },
   mounted() {
@@ -34,8 +35,8 @@ export default {
     this.noteUpdated = { ...this.note };
     this.noteUpdated.files = {};
     Object.keys(this.note.files).forEach(key => {
-      this.files.push({...this.note.files[key]});
-    })
+      this.files.push({ ...this.note.files[key] });
+    });
   },
   methods: {
     updateNote() {
@@ -50,8 +51,7 @@ export default {
           this.$store.dispatch('loadNotes');
           this.$parent.close();
         });
-      }
-      else {
+      } else {
         this.displayDupError = true;
       }
     },
@@ -59,7 +59,7 @@ export default {
       this.files.push({
         name: '',
         language: 'text',
-        content: ''
+        content: '',
       });
     },
     deleteFile(file) {
@@ -70,7 +70,9 @@ export default {
       let dupFiles = false;
 
       this.files.forEach(file => {
-        const key = `${file.name}.${converter.languageToExtension(file.language)}`;
+        const key = `${file.name}.${converter.languageToExtension(
+          file.language
+        )}`;
 
         if (map.has(key)) {
           dupFiles = true;
@@ -79,13 +81,19 @@ export default {
       });
 
       return dupFiles;
-    }
+    },
   },
   computed: {
+    ...Vuex.mapGetters(['gistsSelected']),
     isDisabled() {
       return (
         !/\S/.test(this.noteUpdated.name) ||
-        this.files.some(file => !/\S/.test(file.name) || !/\S/.test(file.language) || !/\S/.test(file.content))
+        this.files.some(
+          file =>
+            !/\S/.test(file.name) ||
+            !/\S/.test(file.language) ||
+            !/\S/.test(file.content)
+        )
       );
     },
   },
@@ -93,4 +101,5 @@ export default {
 </script>
 
 <style src="./UpdateNoteModal.scss" lang="scss">
+
 </style>

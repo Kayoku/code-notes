@@ -1,6 +1,6 @@
 <div id="notes-list">
   <div id="search-buttons" class="columns">
-    <div class="column is-11">
+    <div id="search">
       <b-field>
         <b-input placeholder="Search by name, description or language..."
                  v-model="searchField"
@@ -9,8 +9,11 @@
         </b-input>
       </b-field>
     </div>
-    <div class="column is-1">
-      <button class="button is-dark is-pulled-right" @click="createNoteModalActive = true">
+    <div id="buttons">
+      <button id="preferences" class="button is-light" @click="settingsModalActive = true">
+        <b-icon icon="gear"></b-icon>
+      </button>
+      <button id="add-note" class="button is-dark" @click="createNoteModalActive = true">
         <b-icon icon="plus"></b-icon>
       </button>
     </div>
@@ -24,7 +27,7 @@
   <div v-if="notesFiltered.length === 0 && searchField === ''" class="columns notes">
     <div class="column is-12 no-note">
       <h1>Hey !</h1>
-      <h2>You don't have any note...</h2>
+      <h2>You don't have any {{gistsSelected ? 'gist' : 'note'}}...</h2>
       <button class="button is-primary" @click="createNoteModalActive = true">
         Create a new one :)
       </button>
@@ -33,11 +36,15 @@
   <div v-if="notesFiltered.length === 0 && searchField !== ''" class="columns notes">
     <div class="column is-12 no-note">
       <h1>Oh :(</h1>
-      <h2>Sorry, no notes found for your search</h2>
+      <h2>Sorry, no {{gistsSelected ? 'gist' : 'note'}} found for your search</h2>
     </div>
   </div>
 
   <b-modal :active.sync="createNoteModalActive" has-modal-card>
     <cn-create-note-modal></cn-create-note-modal>
+  </b-modal>
+
+  <b-modal :active.sync="settingsModalActive" has-modal-card>
+    <cn-settings-modal></cn-settings-modal>
   </b-modal>
 </div>

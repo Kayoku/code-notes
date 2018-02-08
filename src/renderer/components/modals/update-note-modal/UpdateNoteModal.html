@@ -1,7 +1,7 @@
 <form action="">
   <div class="modal-card">
     <header class="modal-card-head">
-      <p class="modal-card-title">Update note</p>
+      <p class="modal-card-title">Update {{gistsSelected ? 'gist' : 'note'}}</p>
       <h2 class="text-red" v-if="displayDupError">Oh sorry, you can't have duplicated name in your note files...</h2>
     </header>
 
